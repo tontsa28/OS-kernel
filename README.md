@@ -1,4 +1,4 @@
-# tontsaOS-kernel
+# OS-kernel
 
 ## Prerequisites
 
