@@ -33,7 +33,7 @@ You can emulate your operating system using [Qemu](https://www.qemu.org/): (Don'
 
  - `qemu-system-x86_64 -cdrom dist/x86_64/kernel.iso`
  - NOTE: When building your operating system, if changes to your code fail to compile, ensure your QEMU emulator has been closed, as this will block writing to `kernel.iso`.
- - If you get error `qemu: could not load PC BIOS 'bios-256k.bin'` when trying to emulate the kernel, add `-L "path to your qemu installation folder"` after the command. On Windows machines, Qemu is installed to `C:\Program Files\qemu` by default, so then use the following command: `qemu-system-x86_64 -cdrom dist/x86_64/kernel.iso -L C:\Program Files\qemu`
+ - If you get error `qemu: could not load PC BIOS 'bios-256k.bin'` when trying to emulate the kernel, add `-L "path to your qemu installation folder"` after the command. On Windows machines, Qemu is installed to `C:\Program Files\qemu` by default, so then use the following command: `qemu-system-x86_64 -cdrom dist/x86_64/kernel.iso -L "C:\Program Files\qemu"`
 
 Alternatively, you should be able to load the operating system on a USB drive and boot into it when you turn on your computer. (This has not been tested yet.)
 
