@@ -3,14 +3,14 @@
 ## Prerequisites
 
  - A text editor such as [VSCode](https://code.visualstudio.com/).
- - [Docker](https://www.docker.com/) for creating our build-environment.
- - [Qemu](https://www.qemu.org/) for emulating our operating system.
+ - [Docker](https://www.docker.com/) for creating the build-environment.
+ - [Qemu](https://www.qemu.org/) for emulating the operating system.
    - Remember to add Qemu to the path so that you can access it from your command-line. ([Windows instructions here](https://dev.to/whaleshark271/using-qemu-on-windows-10-home-edition-4062))
- - If you don't want to build the ISO image yourself, you can download pre-built ISOs from this [repository](https://github.com/tontsa28/OS-kernel-isos).
+ - If you don't want to build the ISO image yourself, you can download pre-built ISOs from the release tab of this repository.
 
 ## Setup
 
-Build an image for our build-environment:
+Build an image for the build-environment:
  - `docker build buildenv -t myos-buildenv`
 
 ## Build
