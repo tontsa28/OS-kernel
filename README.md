@@ -16,13 +16,12 @@ Build an image for the build-environment:
 ## Build
 
 Enter build environment:
- - Linux: `docker run --rm -it -v "$pwd":/root/env myos-buildenv`
- - MacOS: `docker run --rm -it -v "$PWD":/root/env myos-buildenv`
+ - Linux or MacOS: `docker run --rm -it -v "$(pwd)":/root/env myos-buildenv`
  - Windows (CMD): `docker run --rm -it -v "%cd%":/root/env myos-buildenv`
  - Windows (PowerShell): `docker run --rm -it -v "${pwd}:/root/env" myos-buildenv`
  - NOTE: If you are having trouble with an unshared drive, ensure your docker daemon has access to the drive you're development environment is in. For Docker Desktop, this is in "Settings > Shared Drives" or "Settings > Resources > File Sharing".
 
-Build for x86 (other architectures may come in the future):
+Build for x86 (only supported architecture at the moment):
  - `make build-x86_64`
 
 To leave the build environment, enter `exit`.
@@ -35,7 +34,7 @@ You can emulate your operating system using [Qemu](https://www.qemu.org/): (Don'
  - NOTE: When building your operating system, if changes to your code fail to compile, ensure your QEMU emulator has been closed, as this will block writing to `kernel.iso`.
  - If you get error `qemu: could not load PC BIOS 'bios-256k.bin'` when trying to emulate the kernel, add `-L "path to your qemu installation folder"` after the command. On Windows machines, Qemu is installed to `C:\Program Files\qemu` by default, so then use the following command: `qemu-system-x86_64 -cdrom dist/x86_64/kernel.iso -L "C:\Program Files\qemu"`
 
-Alternatively, you should be able to load the operating system on a USB drive and boot into it when you turn on your computer. (This has not been tested yet.)
+Alternatively, you are able to flash the ISO image on a USB drive and boot into it. This has been tested, but currently it requires legacy or legacy/UEFI boot mode to be enabled.
 
 ## Cleanup
 
