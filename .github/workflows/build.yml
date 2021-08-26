@@ -1,0 +1,36 @@
+name: OS-kernel CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build the Docker development environment
+        run: docker build buildenv -t myos-buildenv
+
+      - name: Enter the Docker development environment
+        run: docker run --rm -it -v "$(pwd)":/root/env myos-buildenv
+
+      - name: Build the kernel
+        run: make build-x86_64
+
+      - name: Upload the kernel image to GitHub Actions
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: kernel
+          path: dist/x86_64/kernel.iso
+
+      - name: Exit the development environment
+        run: exit
+
+      - name: Clean the development environment
+        run: docker rmi myos-buildenv -f
