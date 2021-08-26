@@ -18,10 +18,10 @@ jobs:
         run: docker build buildenv -t myos-buildenv
 
       - name: Start the Docker container
-        run: docker start myos-buildenv
+        run: docker run --name myos-buildenv --rm -it -d myos-buildenv
 
       - name: Build the kernel
-        run: docker exec -it make build-x86_64
+        run: docker exec -d myos-buildenv make build-x86_64
 
       - name: Upload the kernel image to GitHub Actions
         uses: actions/upload-artifact@v2.2.4
