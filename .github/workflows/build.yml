@@ -17,11 +17,11 @@ jobs:
       - name: Build the Docker development environment
         run: docker build buildenv -t myos-buildenv
 
-      - name: Enter the Docker development environment
-        run: docker run --rm -it -v "$(pwd)":/root/env myos-buildenv
+      - name: Start the Docker container
+        run: docker start myos-buildenv
 
       - name: Build the kernel
-        run: make build-x86_64
+        run: docker exec -it make build-x86_64
 
       - name: Upload the kernel image to GitHub Actions
         uses: actions/upload-artifact@v2.2.4
@@ -29,8 +29,8 @@ jobs:
           name: kernel
           path: dist/x86_64/kernel.iso
 
-      - name: Exit the development environment
-        run: exit
+      - name: Stop the Docker container
+        run: docker stop myos-buildenv
 
       - name: Clean the development environment
         run: docker rmi myos-buildenv -f
