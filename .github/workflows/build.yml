@@ -35,5 +35,5 @@ jobs:
       - name: Upload the kernel image to GitHub Actions
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: kernel.iso
+          name: kernel
           path: dist/x86_64/kernel.iso
