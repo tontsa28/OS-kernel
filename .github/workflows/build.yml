@@ -23,14 +23,14 @@ jobs:
       - name: Build the kernel
         run: docker exec -d myos-buildenv make build-x86_64
 
-      - name: Upload the kernel image to GitHub Actions
-        uses: actions/upload-artifact@v2.2.4
-        with:
-          name: kernel
-          path: dist/x86_64/kernel.iso
-
       - name: Stop the Docker container
         run: docker stop myos-buildenv
 
       - name: Clean the development environment
         run: docker rmi myos-buildenv -f
+
+      - name: Upload the kernel image to GitHub Actions
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: kernel
+          path: dist/x86_64/kernel.iso
