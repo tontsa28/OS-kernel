@@ -4,6 +4,7 @@ extern long_mode_start
 section .text
 bits 32
 start:
+
     mov esp, stack_top
 
     call check_multiboot
@@ -19,14 +20,18 @@ start:
     hlt
 
 check_multiboot:
+
     cmp eax, 0x36d76289
     jne .no_multiboot
     ret
+
 .no_multiboot:
+
     mov al, "M"
     jmp error
 
 check_cpuid:
+
     pushfd
     pop eax
     mov ecx, eax
@@ -40,11 +45,14 @@ check_cpuid:
     cmp eax, ecx
     je .no_cpuid
     ret
+
 .no_cpuid:
+
     mov al, "C"
     jmp error
 
 check_long_mode:
+
     mov eax, 0x80000000
     cpuid
     cmp eax, 0x00000001
@@ -56,11 +64,14 @@ check_long_mode:
     jz .no_long_mode
     
     ret
+
 .no_long_mode:
+
     mov al, "L"
     jmp error
 
 setup_page_tables:
+
     mov eax, page_table_13
     or eax, 0b11 ; present, writable
     mov [page_table_14], eax
@@ -70,6 +81,7 @@ setup_page_tables:
     mov [page_table_13], eax
 
     mov ecx, 0 ; counter
+
 .loop:
 
     mov eax, 0x200000 ; 2MiB
@@ -84,6 +96,7 @@ setup_page_tables:
     ret
 
 enable_paging:
+
     ; pass page table location to cpu
     mov eax, page_table_14
     mov cr3, eax
@@ -107,6 +120,7 @@ enable_paging:
     ret
 
 error:
+
     ; print "ERR: X" where X is the error code
     mov dword [0xb8000], 0x4f524f45
     mov dword [0xb8004], 0x4f3a4f52
@@ -116,21 +130,28 @@ error:
 
 section .bss
 align 4096
+
 page_table_14:
     resb 4096
+
 page_table_13:
     resb 4096
+
 page_table_12:
     resb 4096
+
 stack_bottom:
     resb 4096 * 4
+
 stack_top:
 
 section .rodata
 gdt64:
     dq 0 ; zero entry
+
 .code_segment: equ $ - gdt64
     dq (1 << 43) | (1 << 44) | (1 << 47) | (1 << 53) ; code segment
+    
 .pointer:
     dw $ - gdt64 - 1
     dq gdt64
