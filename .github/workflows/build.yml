@@ -37,6 +37,12 @@ jobs:
         
       - name: List files in directory [DEBUG]
         run: ls
+        
+      - name: Change directory to dist/ [DEBUG]
+        run: cd dist/ && ls
+        
+      - name: Change directory to x86_64/ [DEBUG]
+        run: cd x86_64/ && ls
 
       - name: Upload the kernel image to GitHub Actions
         uses: actions/upload-artifact@v2.2.4
