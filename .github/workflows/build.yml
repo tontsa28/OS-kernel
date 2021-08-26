@@ -18,7 +18,7 @@ jobs:
         run: docker build buildenv -t myos-buildenv
 
       - name: Start the Docker container
-        run: docker run --name myos-buildenv --rm -it -d myos-buildenv
+        run: docker run --name myos-buildenv --rm -it -d -v "$(pwd)":/root/env myos-buildenv
 
       - name: Build the kernel
         run: docker exec -d myos-buildenv make build-x86_64
