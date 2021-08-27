@@ -1,12 +1,14 @@
 # OS-kernel
 
+![OS-kernel](https://github.com/tontsa28/OS-kernel/actions/workflows/build.yml/badge.svg)
+
 ## Prerequisites
 
  - A text editor such as [VSCode](https://code.visualstudio.com/).
  - [Docker](https://www.docker.com/) for creating the build-environment.
  - [Qemu](https://www.qemu.org/) for emulating the operating system.
    - Remember to add Qemu to the path so that you can access it from your command-line. ([Windows instructions here](https://dev.to/whaleshark271/using-qemu-on-windows-10-home-edition-4062))
- - If you don't want to build the ISO image yourself, you can download pre-built ISOs from the release tab of this repository.
+ - If you don't want to build the ISO image yourself, you can download pre-built ISOs from the release tab of this repository. You can also get the latest build from the Actions tab by clicking on the latest succesful build.
 
 ## Setup
 
